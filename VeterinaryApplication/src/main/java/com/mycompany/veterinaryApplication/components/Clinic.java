@@ -1,10 +1,13 @@
-package com.mycompany.veterinaryApplication.classes;
+package com.mycompany.veterinaryApplication.components;
 
-import java.io.FileInputStream;
+import com.mycompany.veterinaryApplication.components.person.PetOwner;
+import com.mycompany.veterinaryApplication.components.person.Vet;
+import com.mycompany.veterinaryApplication.components.animal.HousePet;
+import com.mycompany.veterinaryApplication.components.animal.ZooAnimal;
+import com.mycompany.veterinaryApplication.components.business.Zoo;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,15 +18,26 @@ import java.util.Map;
  * @author markc
  */
 public class Clinic implements Serializable{
+    /**
+     * To-do for Clinic Class
+     * - Adapt Lists to be Easier to Read etc etc
+     * - Make sure Information is not Duplicated such as how Pets are linked to Owners/Business.
+     */
     // Basic Store Information
     private String clinicName;
     
     // Using HashMaps as more scalable than standard Lists
-    private Map<Integer, Owner> petOwners;
+    private Map<Integer, PetOwner> petOwners;
     private Map<Integer, Vet> vets;
     private Map<Integer, HousePet> housePets;
     private Map<Integer, ZooAnimal> zooAnimals;
     private Map<Integer, Zoo> zoos;
+    
+    // Using these to Keep track of IDs even when App has been closed
+    private int lastAnimalId;
+    private int lastPersonId;
+    private int lastBusinessId;
+    private int lastAppointmentId;
     
     // First Constructor - Used when creating an initial Clinic
     public Clinic(String clinicName) throws FileNotFoundException {
@@ -37,6 +51,12 @@ public class Clinic implements Serializable{
         this.zooAnimals = new HashMap<>();
         this.zoos = new HashMap<>();
         
+        // Initiating the Ids at 0
+        lastAnimalId = 0;
+        lastPersonId = 0;
+        lastBusinessId = 0;
+        lastAppointmentId = 0;
+        
         String filename = this.clinicName + ".txt";
         try (FileOutputStream fileOut = new FileOutputStream(filename);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
@@ -49,7 +69,7 @@ public class Clinic implements Serializable{
     }
     
     // Overides the initial Constructor - Used when opening a clinic
-    public Clinic(String clinicName, Map<Integer, Owner> petOwners, Map<Integer, Vet> vets,
+    public Clinic(String clinicName, Map<Integer, PetOwner> petOwners, Map<Integer, Vet> vets,
             Map<Integer, HousePet> housePets, Map<Integer, ZooAnimal> zooAnimals, Map<Integer, Zoo> zoos) {
         // Stores the clinic Name
         this.clinicName = clinicName;
@@ -70,25 +90,42 @@ public class Clinic implements Serializable{
         this.clinicName = clinicName;
     }
     
-    public void addPetOwner(Owner owner) {
-        if (this.petOwners.isEmpty()) {
-           this.petOwners.put(1, owner);
-        }
-        else {
-            int key = findHighestKey(this.petOwners) + 1;
-            this.petOwners.put(key, owner);
-        }
+    public void getAnimals() {
     }
     
-    // Used to retrieve the highest key within the Map
-    private static Integer findHighestKey(Map<Integer, ?> map) {
-        int highestKey = Integer.MIN_VALUE;
-        for (Integer key : map.keySet()) {
-            if (key > highestKey){
-                highestKey = key;
-            }
-        }
-        return highestKey;
+    public void addPetOwner(PetOwner owner) {
+    }
+    
+    public void increaseAnimalId() {
+        this.lastAnimalId += 1;
+    }
+    
+    public int getLastAnimalId() {
+        return this.lastAnimalId;
+    }
+    
+    public void increasePersonId() {
+        this.lastPersonId += 1;
+    }
+    
+    public int getLastPersonId() {
+        return this.lastPersonId;
+    }
+    
+    public void increaseBusinessId() {
+        this.lastBusinessId += 1;
+    }
+    
+    public int getLastBusinessId() {
+        return this.lastBusinessId;
+    }
+    
+    public void increaseAppointmenId() {
+        this.lastBusinessId += 1;
+    }
+    
+    public int getLastAppointmentId() {
+        return this.lastAppointmentId;
     }
 }
 

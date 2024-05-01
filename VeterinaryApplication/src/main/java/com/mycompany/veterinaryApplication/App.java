@@ -1,13 +1,15 @@
 package com.mycompany.veterinaryApplication;
 
-import com.mycompany.veterinaryApplication.classes.Clinic;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+
+import com.mycompany.veterinaryApplication.components.Clinic;
+import com.mycompany.veterinaryApplication.components.Validator;
+import java.util.List;
 
 /**
  * JavaFX App
@@ -15,19 +17,21 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
     public static Clinic openClinic;
+    public List animalList;
+    public static Validator validator = new Validator();
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("MainMenuState"));
+        scene = new Scene(loadFXML("MainMenu"));
         stage.setTitle("Vet Application");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
