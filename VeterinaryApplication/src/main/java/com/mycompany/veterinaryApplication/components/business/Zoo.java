@@ -4,13 +4,17 @@
  */
 package com.mycompany.veterinaryApplication.components.business;
 
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
+import java.util.Date;
+
 /**
- *
+ * Zoo Class
+ * Zoo class while currently not providing any differences over Farm Class is seperated as allows for easier Scalability of the Application
+ * 
  * @author markc
  */
-public class Zoo {
-    /**
-     * To-do
-     * - Setup Zoo class to allow creation of Zoo Objects
-     */
+public class Zoo extends Business {
+    public Zoo(String name, Date openDate, int houseNumber, String streetName, String postcode) throws ValidationException {
+        super(name, openDate, houseNumber, streetName, postcode);
+    }
 }
