@@ -3,14 +3,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 27 Apr 2024, 16:59:02
+    Created on : 5 May 2024, 19:32:42
     Author     : markc
 */
 
-.bordered {
-    -fx-border-color: black;
-    -fx-border-width: 1px; 
-    -fx-border-style: solid;
-    -fx-underline: true;
-    
+.overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.075);
+}
+
+.customSize {
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+#titleLabel {
+    -fx-font-size: 24px;
+    -fx-font-weight: 600;
+}
+
+.dataLabel {
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
 }

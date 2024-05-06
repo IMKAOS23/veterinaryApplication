@@ -26,14 +26,12 @@ public class FileHandler {
     Validator validator = new Validator();
     
     // Method for Serialising a Class in the case of the application the "Clinic" Class is to be serialised
-    public void serialise(String filename) throws IOException {
-        try (FileOutputStream fileOut = new FileOutputStream(filename);
-             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
-            objectOut.writeObject(this);
-            System.out.println("Data Saved to " + filename);
+    public void serialise(String filename, Clinic clinic) throws IOException {
+        try (FileOutputStream fileOut = new FileOutputStream(filename + ".txt"); // Creating FileOutputStream - How to Save to File
+             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) { // Creating ObjectOutputStream - How to get object
+            objectOut.writeObject(clinic); // Writing object to ObjectOutputStream which then gets saved to FileOutputStream in turn A file.
         }  
         catch (IOException e) {
-            System.out.println("Failed to Serialise Object to File " + filename);
         }
     }
     

@@ -1,34 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.veterinaryApplication.components.animal;
 
 import com.mycompany.veterinaryApplication.components.business.Farm;
 import com.mycompany.veterinaryApplication.components.person.PetOwner;
-import java.util.HashMap;
 
 /**
- *
+ * ExoticAnimal Class
+ * Used to create Exotic Animal Objects
+ * 
  * @author markc
  */
 public class ExoticAnimal extends Animal{
     /**
-     * To-do
-     * - Allow the creation of ExoticAnimal objects
-     * - Appointments going to be a List of Ids linking to Appointments HashMap in Clinic, Basically a Pointer.
+     *
      */
     private Object owner;
-    private HashMap appointments;
     
-    // As a Normal Pet Owner and Farms could house these Exotic Animals
-    // Overloading the constructor to create based upon what is inputted
-    public ExoticAnimal(String name, int age, String colour, String species) {
+    /**
+     * Constructs a new ExoticAnimal with specified name, age, colour, species, owner
+     * Use either PetOwner or Farm type
+     * 
+     * @param name
+     * @param age
+     * @param colour
+     * @param species
+     * @param owner 
+     * 
+     * @throws IllegalArgumentException if type of owner is not PetOwner or Farm
+     */
+    public ExoticAnimal(String name, int age, String colour, String species, Object owner) {
         super(name, age, colour, species);
+        if (owner instanceof PetOwner || owner instanceof Farm) { 
+            this.owner = owner;
+        } else {
+            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
+        }
     }
     
-    public ExoticAnimal(String name, int age, String colour, String species, boolean isFarm) {
-        super(name, age, colour, species);
-        owner = new Farm();
+    /**
+     * Returns Owner of animal
+     * 
+     * @return owner
+     */
+    public Object getOwner() {
+        return this.owner;
+    }
+    
+    /**
+     * Allows the changing of ExoticAnimal owner
+     *
+     * @param owner 
+     * 
+     * @throws IllegalArgumentException if type is not PetOwner or Farm
+     */
+    public void setOwner(Object owner) {
+        if (owner instanceof PetOwner || owner instanceof Farm) {
+            this.owner = owner;
+        } else {
+            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
+        }
     }
 }

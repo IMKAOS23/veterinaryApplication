@@ -8,7 +8,6 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Popup;
 
 
 public class MainMenuController { 
@@ -23,10 +22,16 @@ public class MainMenuController {
     @FXML
     private Label placeholderText;
     
+    public void initialize() {
+        if (App.openClinic != null) {
+            clinicOpen.setText("Clinic Name: " + App.openClinic.getName());
+        }
+    }
+    
     @FXML
     private void submitSearch() throws IOException {
         if (App.openClinic == null) { 
-            System.out.println("Open a Clinic before Searching for an Animal");
+            App.popup.showError("Clinic not open", "Open a Clinic before trying to search for an Animal");
         } else {
             System.out.println("Found Pet!");
         }
@@ -38,21 +43,21 @@ public class MainMenuController {
         // Should open dialog with different type of Animals - House Pet, Farm Animal, Zoo Animal, Exotic Animal
         if (App.openClinic == null) {
             // Alert User they need to open a clinic first
-            System.out.println("Open a Clinic before Adding an Animal");
+            App.popup.showError("Clinic not open", "Open a Clinic before trying to add an Animal");
         }
         else {
-            App.setRoot("AddAnimalState");
+            App.popup.showWindow("Choose Animal Type", "CreateAnimalPopup");
         }
     }
     
     @FXML
     private void createPerson() throws IOException {
-        // Should open dialog with different type of People - Pet Owners, Vetenarians, Business Owners (Maybe wont do, or might only be in createBusiness)
+        // Should open dialog with different type of People - Pet Owners or Vetenarians)
         if (App.openClinic == null) {
-            System.out.println("Open a Clinic Before Adding a Vet");
+            App.popup.showError("Clinic not open", "Open a Clinic before trying to add a Person");
         }
         else {
-            System.out.println("Added Vet");
+            App.popup.showWindow("Choose Person Type", "CreatePersonPopup");
         }
     }
     
@@ -60,10 +65,10 @@ public class MainMenuController {
     private void createBusiness() throws IOException {
         // Should open dialog with different type of Businesses - Zoos, Farms
         if (App.openClinic == null) {
-            System.out.println("Open a Clinic Before Adding an Pet Owner");
+            App.popup.showError("Clinic not open", "Open a Clinic before trying to add a business");
         }
         else {
-            System.out.println("Added Pet Owner");
+            App.popup.showWindow("Choose Business Type", "CreateBusinessPopup");
         }
     }
     
@@ -71,18 +76,33 @@ public class MainMenuController {
     private void createAppointment() throws IOException {
         // opens the Appointment creator allowing User to select a Pet, Date and Time and have a Vet Selected (Might not be auto-selected)
         if (App.openClinic == null) {
-            System.out.println("Open a Clinic Before Adding a Zoo");
+            App.popup.showError("Clinic not open", "Open a Clinic before trying to book an appointment");
         }
         else {
-            System.out.println("Added Zoo");
+            App.setRoot("createAppointment");
+            
         }
     }
     
     @FXML
     private void createClinic() throws IOException {
         // Method used to Create a Basic Clinic - Would open Dialog asking for a little information such as Name
-        Clinic clinic = new Clinic("Freds Veterinary Surgery");
-        App.openClinic = clinic;
+        String clinicName = App.popup.showTextInput("Create Clinic", "Enter A Clinic Name", "Clinic Name: ");
+        
+        if ("32323423423422".equals(clinicName)) {
+            System.out.println("Cancelled out");
+            
+        } else if (clinicName != null) {
+            if (App.validator.validateClinicName(clinicName)) {
+                Clinic clinic = new Clinic(clinicName);
+                App.openClinic = clinic;
+                clinicOpen.setText("Clinic Name: " + App.openClinic.getName());
+            } else {
+                App.popup.showError("Could Not Create Clinic", "Clinic name must be more than 8 characters");
+            }
+        } else {
+            App.popup.showError("Could Not Create Clinic", "Clinic must have a name");
+        }
         // Show User they sucessfully created a clinic
     }
     
@@ -102,11 +122,17 @@ public class MainMenuController {
     private void closeClinic() throws IOException {
         // Sets openClinic to null and resets text to say None
         if (App.openClinic != null) {
-            App.openClinic = null;
-            clinicOpen.setText("Clinic Name: None");
-            // Show the User they successfully closed Clinic
+            boolean result = App.popup.showConfirm("Are you sure?", "Are you sure you want to close Clinic?");
+            if (result == true) {
+                App.openClinic = null;
+                clinicOpen.setText("Clinic Name: None");
+                App.popup.ShowMessage("Closed Clinic", "Clinic Successfully closed");
+            } else {
+                App.popup.ShowMessage("Clinic not Closed", "Clinic was not closed");
+            }
         } else {
-            // Alert User that no Clinic is Open
+        // Alert User that no Clinic is Open
+        App.popup.showError("Cannot close Clinic", "No Clinic Open");
         }
     }
 }

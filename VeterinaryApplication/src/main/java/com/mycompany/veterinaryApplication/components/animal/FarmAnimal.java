@@ -4,26 +4,48 @@
  */
 package com.mycompany.veterinaryApplication.components.animal;
 
+import com.mycompany.veterinaryApplication.components.business.Farm;
+
 /**
- *
+ * Farm Animal Class
+ * Allows the creation of FarmAnimal objects
+ * Farm animals only can be associated with a Farm and would have specialised Vets
+ * 
  * @author markc
  */
 public class FarmAnimal extends Animal{
+    private Farm owner;
+    
     /**
+     * Constructs a ZooAnimal object with specified name, age, colour, species and owner
      * 
      * @param name
      * @param age
      * @param colour
      * @param species
+     * @param owner
      * 
-     * To-Do
-     * - Allow Creation of FarmAnimal Objects
-     * - Figure out the differences between FarmAnimals and HousePets other than Just being easier to Sort
      */
-    
-    // Overloading Constructor as can be found by standard Pet Owners or Farms
-    public FarmAnimal(String name, int age, String colour, String species) {
+    public FarmAnimal(String name, int age, String colour, String species, Farm owner) {
         super(name, age, colour, species);
+        this.owner = owner;
     }
     
+    /**
+     * Returns the owner of the FarmAnimal
+     * 
+     * @return owner
+     */
+    public Farm getOwner() {
+        return this.owner;
+    }
+    
+    /**
+     * Allows the changing of FarmAnimal owner
+     * 
+     * @param owner 
+     */
+    public void setOwner(Farm owner) {
+        this.owner = owner;
+    }
 }

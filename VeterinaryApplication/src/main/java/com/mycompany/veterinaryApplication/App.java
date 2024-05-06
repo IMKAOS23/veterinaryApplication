@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import com.mycompany.veterinaryApplication.components.Clinic;
+import com.mycompany.veterinaryApplication.components.FileHandler;
+import com.mycompany.veterinaryApplication.components.Popup;
 import com.mycompany.veterinaryApplication.components.Validator;
 import java.util.List;
 
@@ -19,8 +21,11 @@ public class App extends Application {
 
     public static Scene scene;
     public static Clinic openClinic;
+    public static String type;
     public List animalList;
     public static Validator validator = new Validator();
+    public static Popup popup = new Popup();
+    public static FileHandler fileHandler = new FileHandler();
 
     @Override
     public void start(Stage stage) throws IOException {

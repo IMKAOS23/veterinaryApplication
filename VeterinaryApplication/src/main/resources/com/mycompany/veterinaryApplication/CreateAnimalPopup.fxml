@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21"
+    fx:controller="com.mycompany.veterinaryApplication.controllers.CreateAnimalPopupController"
+    stylesheets="@style.css"
+    prefWidth="600" prefHeight="300">
+    
+    <Label fx:id="chooseLabel" styleClass="customSize" text="Select a Type of Animal Record" textAlignment="CENTER" layoutX="190" layoutY="25" prefWidth="300" prefHeight="50"  underline="true" />
+    
+    <Button fx:id="housePet" text="Create House Pet" onAction="#createHousePet" layoutX="50" layoutY="75" prefHeight="50" prefWidth="200" />
+    <Button fx:id="exoticAnimal" text="Create Exotic Animal" onAction="#createExoticAnimal" layoutX="350" layoutY="75" prefHeight="50" prefWidth="200" />
+    <Button fx:id="farmAnimal" text="Create Farm Animal" onAction="#createFarmAnimal" layoutX="50" layoutY="150" prefHeight="50" prefWidth="200" />
+    <Button fx:id="zooAnimal" text="Create Zoo Animal" onAction="#createZooAnimal" layoutX="350" layoutY="150" prefHeight="50" prefWidth="200" />
+    <Button fx:id="closeButton" text="Close" onAction="#closeDialog" layoutX="200" layoutY="225" prefHeight="50" prefWidth="200"/>
+    
+</Pane>
