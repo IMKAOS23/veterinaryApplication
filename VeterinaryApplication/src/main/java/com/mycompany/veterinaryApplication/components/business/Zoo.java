@@ -5,16 +5,30 @@
 package com.mycompany.veterinaryApplication.components.business;
 
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Zoo Class
- * Zoo class while currently not providing any differences over Farm Class is seperated as allows for easier Scalability of the Application
+ * Zoo class while currently not much differences over Farm Class is seperated as allows for easier Scalability of the Application
  * 
  * @author markc
  */
 public class Zoo extends Business {
-    public Zoo(String name, Date openDate, int houseNumber, String streetName, String postcode) throws ValidationException {
-        super(name, openDate, houseNumber, streetName, postcode);
+    ZooAddress address;
+    
+    /**
+     * Constructs a new Zoo with specified name, openDate and address details
+     * 
+     * @param name
+     * @param openDate
+     * @param streetName
+     * @param postcode
+     * @param city
+     * 
+     * @throws ValidationException 
+     */
+    public Zoo(String name, LocalDate openDate, String streetName, String postcode, String city) throws ValidationException {
+        super(name, openDate);
+        address = new ZooAddress(streetName, postcode, city);
     }
 }

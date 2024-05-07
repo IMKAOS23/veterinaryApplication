@@ -4,7 +4,8 @@
  */
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.components.business.Zoo;
+import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 
 /**
  * Zoo Animal Class
@@ -14,7 +15,6 @@ import com.mycompany.veterinaryApplication.components.business.Zoo;
  * @author markc
  */
 public class ZooAnimal extends Animal{
-    private Zoo owner;
     /**
      * Constructs ZooAnimal objects with specified name, age, colour, species and owner
      * 
@@ -22,29 +22,14 @@ public class ZooAnimal extends Animal{
      * @param age
      * @param colour
      * @param species 
-     * @param owner
+     * @param id
+     * 
+     * @throws ValidationException
+     * @throws IllegalArgumentException
+     * @throws OwnerNotFoundException
      * 
      */
-    public ZooAnimal(String name, int age, String colour, String species, Zoo owner) {
-        super(name, age, colour, species);
-        this.owner = owner;
-    }
-    
-    /**
-     * Returns the owner of the Zoo Animal
-     * 
-     * @return owner 
-     */
-    public Zoo getOwner() {
-        return this.owner;
-    }
-    
-    /**
-     * Allows the changing of ZooAnimal owner
-     * 
-     * @param owner 
-     */
-    public void setOwner(Zoo owner) {
-        this.owner = owner;
+    public ZooAnimal(String name, String age, String colour, String species, int id) throws ValidationException, IllegalArgumentException {
+        super(name, age, colour, species, id);
     }
 }

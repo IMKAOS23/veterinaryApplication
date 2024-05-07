@@ -4,6 +4,8 @@
  */
 package com.mycompany.veterinaryApplication.components;
      
+import com.mycompany.veterinaryApplication.App;
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,29 +29,31 @@ public class FileHandler {
     
     // Method for Serialising a Class in the case of the application the "Clinic" Class is to be serialised
     public void serialise(String filename, Clinic clinic) throws IOException {
-        try (FileOutputStream fileOut = new FileOutputStream(filename + ".txt"); // Creating FileOutputStream - How to Save to File
+        try (FileOutputStream fileOut = new FileOutputStream(filename + ".dat"); // Creating FileOutputStream - How to Save to File
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) { // Creating ObjectOutputStream - How to get object
             objectOut.writeObject(clinic); // Writing object to ObjectOutputStream which then gets saved to FileOutputStream in turn A file.
         }  
         catch (IOException e) {
+            App.popup.showError("Error", e.getMessage());
         }
     }
     
     // Method for DeSerialising a File to an Object to be used throughout the application
-    public Clinic deserialiseFile(String filePath) throws IOException, ClassNotFoundException {
+    public Clinic deserialiseFile(String filePath) throws IOException, ClassNotFoundException, ValidationException {
         try (FileInputStream fileIn = new FileInputStream(filePath);
             ObjectInputStream objIn = new ObjectInputStream(fileIn)) {
             Object obj = objIn.readObject();
             if (validator.validateClinic(obj)) {
-                System.out.println("Deserialised Object. Instance of Clinic");
+                Clinic clinic = (Clinic) obj;
+                App.popup.showMessage("Successfully Opened Clinic", "Successfully opened Clinic - " + clinic.getName());
                 return (Clinic) obj;
             } else {
-                System.out.println("Invalid File. Not a Clinic");
+                App.popup.showError("Error", "File Error: File is not a Clinic");
                 return null;
             }
         }
         catch (IOException e) {
-            System.out.println("Failed to Deserialise File. Is not an Object");
+            App.popup.showError("Error", "Deserialization Error: Failed to Deserialize File");
             return null;
         }
     }
@@ -64,5 +68,22 @@ public class FileHandler {
         );
         Stage stage = (Stage) openFileButton.getScene().getWindow();
         return fileChooser.showOpenDialog(stage);
+    }
+    
+    
+    // Probably not going to be implemented due to time constraints
+    // Transactions as Serialising constantly is resource intensive
+    public void beginTransaction() {
+        
+    }
+    
+    // This will Commit the changes to the .dat file using the .txt unserialised file while saving the past obj to be used for rollback
+    public void commitTransaction() {
+        
+    }
+    
+    // This will use the .txt file to rollback the commit
+    public void rollbackTransaction() {
+        
     }
 }

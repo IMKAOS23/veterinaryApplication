@@ -5,11 +5,14 @@
 package com.mycompany.veterinaryApplication.components.animal;
 
 import com.mycompany.veterinaryApplication.App;
-import com.mycompany.veterinaryApplication.components.Showable;
+import com.mycompany.veterinaryApplication.components.Tuple;
+import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 /**
  * Animal Class - Abstract Class that implements the Serializable interface to allow the serialization of objects
@@ -19,34 +22,46 @@ import java.util.List;
  * 
  * @author markc
  */
-public abstract class Animal implements Showable, Serializable{
+public abstract class Animal implements Serializable{
     private String name;
     private int age;
     private String colour;
     private String species;
-    private List appointments;
+    private final int owner;
     
     /**
      * Constructs a basic Animal object, called using super() method in a subclasses constructor
      * 
-     * @param name
-     * @param age
-     * @param colour
-     * @param species 
+     * @param name - String
+     * @param age - Integer
+     * @param colour - String
+     * @param species - String
+     * 
+     * @throws ValidationException 
      */
-    public Animal(String name, int age, String colour, String species) {
-        this.name = name;
-        this.age = age;
-        this.colour = colour;
-        this.species = species;
-        this.appointments = new ArrayList();
-    }
-    
-    @Override
-    public void addToShowList() {
+    public Animal(String name, String age, String colour, String species, int id) throws ValidationException {
+        // Checking if Name is 2 or More Characters
+        if (App.validator.validateString(name, "Name")) {
+            this.name = name;
+        }
         
-    }
-    
+        // Converting Age to integer then Validating if it is above 0
+        int intAge = App.validator.convertToInteger(age, "Age");
+        if (App.validator.validateInt(intAge, "Age")) {
+            this.age = intAge;
+        }
+        
+        // Checking if Colour is 2 or more Characters - In proper Application would have a list of valid colours to check
+        if (App.validator.validateString(colour, "Colour")) {
+            this.colour = colour;
+        }
+        
+        // Checking if Species is 2 or more Characters - In proper Application would have list of valid Species
+        if (App.validator.validateString(species, "Species")) {
+            this.species = species;
+        }
+        this.owner = id;
+    }   
     /**
      * Returns Animal name
      * 
@@ -61,13 +76,12 @@ public abstract class Animal implements Showable, Serializable{
      * 
      * @param input Type String
      * 
-     * @throws ValidationException if validation of name fails
+     * @throws ValidationException
      */
     public void setName(String input) throws ValidationException {
-        if (!App.validator.validateName(input)) {
-            throw new ValidationException("Validation Error: Name must be more than 2 characters in length");
+        if (App.validator.validateString(input, "Name")) {
+            this.name = input;
         }
-        this.name = input;
     }
     
     /**
@@ -84,19 +98,13 @@ public abstract class Animal implements Showable, Serializable{
      * 
      * @param input Type Integer
      * 
-     * @throws ValidationException if type is not Integer or Validation from 
+     * @throws ValidationException
      */
     public void setAge(String input) throws ValidationException {
-        try {
-            int age = Integer.parseInt(input);
-            
-            if (!App.validator.validateInt(age)) {
-                throw new ValidationException("Validation Error: Age must be above 0");
+        int intAge = App.validator.convertToInteger(input, "Age");
+            if (App.validator.validateInt(intAge, "Age")) {
+                this.age = intAge;
             }
-            this.age = age;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Type Error: Age must be of Type Int");
-        }
     }
     
     /**
@@ -110,12 +118,15 @@ public abstract class Animal implements Showable, Serializable{
     
     /**
      * Allows changing of Animal colour
-     * Does not Require Type checking like others due to how it is chose using a ChoiceBox
      * 
-     * @param colour 
+     * @param input Type String
+     * 
+     * @throws ValidationException 
      */
-    public void setColour(String colour) {
-        this.colour = colour;
+    public void setColour(String input) throws ValidationException {
+        if (App.validator.validateString(input, "Colour")) {
+            this.colour = input;
+        }
     }
     
     /**
@@ -129,25 +140,40 @@ public abstract class Animal implements Showable, Serializable{
     
     /**
      * Allows changing of Animal species
-     * Does not require Type checking like others due to how it is chose using a ChoiceBox
-     * @param species 
+     * 
+     * @param input Type String
+     * 
+     * @throws ValidationException 
      */
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setSpecies(String input) throws ValidationException {
+        if (App.validator.validateString(input, "Species")) {
+            this.species = input;
+        }
     }
     
     /**
-     * Returns the list of appointments
-     * Appointments are of type Tuple.
+     * Uses Map to find and return Owner of animal
      * 
-     * @return appointments list
+     * @return owner
+     * 
+     * @throws OwnerNotFoundException
      */
-    public List getAppointmentList() {
-        return this.appointments;
-    }
-    
-    // To be created
-    public void addAppointment() {
-        // Create Appointment
+    public Object getOwner() throws OwnerNotFoundException {
+        Map<Integer, Object> ownerMap = new HashMap<>();
+
+        List<Tuple<Integer, Animal>> owners = App.openClinic.getOwners();
+
+        // Add All Owners to the OwnerMap - (Using HashMap for Faster retrieval of Data)
+        for (Tuple<Integer, Animal> tuple : owners) {
+            ownerMap.put(tuple.getKey(), tuple.getValue());
+        }
+
+        // Retrieve the owner using the stored owner ID
+        Object owner = ownerMap.get(this.owner);
+        if (owner == null) {
+            // Handle case where owner ID is not found
+            throw new OwnerNotFoundException("Owner not found for HousePet ID: " + this.owner);
+        }
+        return owner;
     }
 }

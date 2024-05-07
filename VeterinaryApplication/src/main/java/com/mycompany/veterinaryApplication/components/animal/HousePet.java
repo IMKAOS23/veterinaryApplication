@@ -1,7 +1,12 @@
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.components.business.Farm;
-import com.mycompany.veterinaryApplication.components.person.PetOwner;
+import com.mycompany.veterinaryApplication.App;
+import com.mycompany.veterinaryApplication.components.Tuple;
+import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * HousePet class
@@ -27,42 +32,11 @@ public class HousePet extends Animal {
      * @param age
      * @param colour
      * @param species
-     * @param owner 
+     * @param id 
      * 
-     * @throws IllegalArgumentException if owner is not of type PetOwner or Farm
+     * @throws ValidationException 
      */
-    public HousePet(String name, int age, String colour, String species, Object owner) {
-        super(name, age, colour, species);
-        if (owner instanceof PetOwner || owner instanceof Farm) {
-            this.owner = owner;
-
-        } else {
-            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
-        }
-    }
-        
-    /**
-     * Returns the Owner of the House Pet
-     * 
-     * @return owner
-     */
-    public Object getOwner() {
-        return this.owner;
-    }
-    
-    /**
-     * Allows changing of HousePet owner
-     * 
-     * @param owner 
-     * 
-     * @throws IllegalArgumentException if owner is not of type PetOwner or Farm
-     */
-    public void setOwner(Object owner) {
-        if (owner instanceof PetOwner || owner instanceof Farm) {
-            this.owner = owner;
-        } else {
-            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
-            // Show Error Message - "Failed to change Owner of HousePet, Owner must be of type PetOwner or Farm"
-        }
+    public HousePet(String name, String age, String colour, String species, int id) throws ValidationException {
+        super(name, age, colour, species, id);
     }
 }

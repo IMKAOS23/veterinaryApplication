@@ -4,6 +4,7 @@
  */
 package com.mycompany.veterinaryApplication.components.person;
 
+import com.mycompany.veterinaryApplication.App;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Vet extends Person{
     private List<String> daysWorking;
     
     /**
-     * 
+     * Constructs a Vet object with specified First Name, Last Name, Age, Email, Phone Number, Speciality and Address details
      * 
      * @param firstName
      * @param lastName
@@ -30,23 +31,39 @@ public class Vet extends Person{
      * @param houseNumber
      * @param streetName
      * @param postcode
-     * @param specialty
+     * @param city
+     * @param speciality
      * 
      * @throws ValidationException 
      */
-    public Vet(String firstName, String lastName, int age, String email, String phoneNumber, int houseNumber, String streetName, String postcode, String specialty) throws ValidationException {
-        super(firstName, lastName, age, email, phoneNumber, houseNumber, streetName, postcode);
-        this.specialty = specialty;
+    public Vet(String firstName, String lastName, String age, String email, String phoneNumber, String houseNumber, String streetName, String postcode, String city, String speciality) throws ValidationException {
+        super(firstName, lastName, age, email, phoneNumber, houseNumber, streetName, postcode, city);
+        if (App.validator.validateString(speciality, "Speciality")) {
+            this.specialty = speciality;
+        }
         this.daysWorking = new ArrayList<>();
     }
     
+    /**
+     * Returns speciality of Vet
+     * 
+     * @return speciality 
+     */
     public String getSpecialty() {
         return this.specialty;
     }
     
-    // Create a validation method for checking if string is either (House Pet, Exotic Animal, Farm Animal, Zoo Animal)
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    /**
+     * Allows the changing of Vet speciality
+     * 
+     * @param input
+     * 
+     * @throws ValidationException
+     */
+    public void setSpecialty(String input) throws ValidationException {
+        if (App.validator.validateString(input, "Speciality")) {
+            this.specialty = input;
+        }
     }
     
     // Create method to add a Day to daysWorking List

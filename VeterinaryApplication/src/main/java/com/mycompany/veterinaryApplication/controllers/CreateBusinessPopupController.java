@@ -20,13 +20,13 @@ public class CreateBusinessPopupController {
     private void createFarm() throws IOException {
         this.closeDialog();
         App.type = "farm";
-        App.popup.showWindow("Add Farm", "AddBusiness");
+        App.setRoot("AddBusiness");
     }
     
     @FXML 
     private void createZoo() throws IOException{
         this.closeDialog();
         App.type = "zoo";
-        App.popup.showWindow("Add Zoo", "AddAnimal");
+        App.setRoot("AddBusiness");
     }
 }

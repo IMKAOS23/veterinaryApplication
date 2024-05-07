@@ -13,8 +13,8 @@
     
     <Label fx:id="chooseLabel" styleClass="customSize" text="Select a Type of Business Record" textAlignment="CENTER" layoutX="190" layoutY="25" prefWidth="300" prefHeight="50"  underline="true" />
     
-    <Button fx:id="farm" text="Create Pet Owner" onAction="#createFarm" layoutX="50" layoutY="75" prefHeight="50" prefWidth="200" />
-    <Button fx:id="zoo" text="Create Vet" onAction="#createZoo" layoutX="350" layoutY="75" prefHeight="50" prefWidth="200" />
+    <Button fx:id="farm" text="Create Farm" onAction="#createFarm" layoutX="50" layoutY="75" prefHeight="50" prefWidth="200" />
+    <Button fx:id="zoo" text="Create Zoo" onAction="#createZoo" layoutX="350" layoutY="75" prefHeight="50" prefWidth="200" />
     <Button fx:id="closeButton" text="Close" onAction="#closeDialog" layoutX="200" layoutY="175" prefHeight="50" prefWidth="200"/>
     
 </Pane>

@@ -1,7 +1,12 @@
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.components.business.Farm;
-import com.mycompany.veterinaryApplication.components.person.PetOwner;
+import com.mycompany.veterinaryApplication.App;
+import com.mycompany.veterinaryApplication.components.Tuple;
+import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ExoticAnimal Class
@@ -13,7 +18,7 @@ public class ExoticAnimal extends Animal{
     /**
      *
      */
-    private Object owner;
+    private int owner;
     
     /**
      * Constructs a new ExoticAnimal with specified name, age, colour, species, owner
@@ -23,40 +28,12 @@ public class ExoticAnimal extends Animal{
      * @param age
      * @param colour
      * @param species
-     * @param owner 
+     * @param id
      * 
+     * @throws ValidationException 
      * @throws IllegalArgumentException if type of owner is not PetOwner or Farm
      */
-    public ExoticAnimal(String name, int age, String colour, String species, Object owner) {
-        super(name, age, colour, species);
-        if (owner instanceof PetOwner || owner instanceof Farm) { 
-            this.owner = owner;
-        } else {
-            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
-        }
-    }
-    
-    /**
-     * Returns Owner of animal
-     * 
-     * @return owner
-     */
-    public Object getOwner() {
-        return this.owner;
-    }
-    
-    /**
-     * Allows the changing of ExoticAnimal owner
-     *
-     * @param owner 
-     * 
-     * @throws IllegalArgumentException if type is not PetOwner or Farm
-     */
-    public void setOwner(Object owner) {
-        if (owner instanceof PetOwner || owner instanceof Farm) {
-            this.owner = owner;
-        } else {
-            throw new IllegalArgumentException("Type Error: Owner must be of type PetOwner or Farm");
-        }
+    public ExoticAnimal(String name, String age, String colour, String species, int id) throws ValidationException, IllegalArgumentException {
+        super(name, age, colour, species, id);
     }
 }

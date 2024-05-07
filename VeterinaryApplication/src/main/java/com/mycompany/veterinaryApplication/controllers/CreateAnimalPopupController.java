@@ -20,28 +20,28 @@ public class CreateAnimalPopupController {
     private void createHousePet() throws IOException {
         this.closeDialog();
         App.type = "housePet";
-        App.popup.showWindow("Add House Pet", "AddAnimal");
+        App.setRoot("AddAnimal");
     }
     
     @FXML 
     private void createExoticAnimal() throws IOException{
         this.closeDialog();
         App.type = "exoticAnimal";
-        App.popup.showWindow("Add Exotic Animal", "AddAnimal");
+        App.setRoot("AddAnimal");
     }
     
     @FXML
     private void createFarmAnimal() throws IOException {
         this.closeDialog();
         App.type = "farmAnimal";
-        App.popup.showWindow("Add Farm Animal", "AddAnimal");
+        App.setRoot("AddAnimal");
     }
     
     @FXML
     private void createZooAnimal() throws IOException {
         this.closeDialog();
         App.type = "zooAnimal";
-        App.popup.showWindow("Add Zoo Animal", "AddAnimal");
+        App.setRoot("AddAnimal");
         
     }
 }

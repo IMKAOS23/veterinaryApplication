@@ -4,21 +4,21 @@
  */
 package com.mycompany.veterinaryApplication.components.business;
 
-import com.mycompany.veterinaryApplication.components.Showable;
+import com.mycompany.veterinaryApplication.App;
 import com.mycompany.veterinaryApplication.components.person.Address;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author markc
  */
-public abstract class Business implements Showable, Serializable{
+public abstract class Business implements Serializable{
     String name;
-    Date openDate;
+    LocalDate openDate;
     Address address;
     List<Integer> animalList;
     
@@ -27,64 +27,68 @@ public abstract class Business implements Showable, Serializable{
      * 
      * @param name - Must be more than 2 Characters
      * @param openDate - In format of dd/mm/yyyy
-     * @param houseNumber - Must be 0 or above
-     * @param streetName - Must be more than 2 characters
-     * @param postcode - Must be of UK Format
      * 
      * @throws ValidationException 
      */
-    public Business(String name, Date openDate, int houseNumber, String streetName, String postcode) throws ValidationException {
-        this.name = name;
-        this.openDate = openDate;
-        this.address = new Address(houseNumber, streetName, postcode);
-        this.animalList = new ArrayList<>();
-    }
-    
-    @Override
-    public void addToShowList() {
+    public Business(String name, LocalDate openDate) throws ValidationException {
+        if (App.validator.validateString(name, "Name")) {
+            this.name = name;
+        }
         
+        if (App.validator.validateDate(openDate)) {
+            this.openDate = openDate;
+        }
+        
+        this.animalList = new ArrayList();
     }
     
+    /**
+     * Returns name of Business
+     * 
+     * @return name
+     * 
+     * @throws ValidationException 
+     */
     public String getName() {
         return this.name;
     }
     
+    /**
+     * Allows the changing of Business name
+     * 
+     * @param name
+     * 
+     * @throws ValidationException 
+     */
     public void setName(String name) throws ValidationException {
-        this.name = name;
+        if (App.validator.validateString(name, "Name")) {
+            this.name = name;
+        }
     }
     
-    public Date getOpenDate() {
+    /**
+     * Returns the Open Date of the Business
+     * 
+     * @return openDate 
+     */
+    public LocalDate getOpenDate() {
         return this.openDate;
     }
     
-    public int getHouseNumber() {
-        return this.address.getHouseNumber();
-    }
-    
-    public void setHouseNumber(int houseNumber) throws ValidationException {
-        this.address.setHouseNumber(houseNumber);
-    }
-    
-    public String getStreetName() {
-        return this.address.getStreetName();
-    }
-    
-    public void setStreetName(String streetName) throws ValidationException { 
-        this.address.setStreetName(streetName);
-    }
-    
-    public String getPostcode() {
-        return this.address.getPostcode();
-    }
-    
-    public void setPostcode(String postcode) throws ValidationException {
-        this.address.setPostcode(postcode);
-    }
-    
+    /**
+     * Feature not implemented however would allow you to add animal a business
+     * 
+     * @param animalId 
+     */
     public void addAnimal(int animalId) {
         this.animalList.add(animalId);
     }
     
+    /**
+     * Feature not implemented however would allow you to remove animal from business
+     * 
+     * @param animalId 
+     */
     public void removeAnimal(int animalId) {
         this.animalList.remove(animalId);
     }

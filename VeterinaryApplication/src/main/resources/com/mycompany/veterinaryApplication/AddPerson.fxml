@@ -7,19 +7,50 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane prefHeight="500" prefWidth="800" styleClass="overlay" stylesheets="@style.css"
+<Pane fx:id="parentPane" prefHeight="800" prefWidth="1200" styleClass="overlay" stylesheets="@style.css"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.mycompany.veterinaryApplication.controllers.AddPersonController">
     
     <!-- Layout -->
     <!-- Button for Main Menu Navigation - Top Left -->
-      <Button fx:id="btnClose" layoutX="25" layoutY="25" onAction="#closeDialog" prefHeight="30" prefWidth="200" text="Close" />
+      <Button fx:id="btnBack" layoutX="25" layoutY="25" onAction="#goBack" prefHeight="30" prefWidth="200" text="Go Back to Main Menu" />
       
     <!-- Label for Title of Page - Top Center -->
-      <Label fx:id="titleLabel" styleClass="dataLabel" layoutX="275" layoutY="30" />
+      <Label fx:id="titleLabel" id="bigTitle" layoutX="445" layoutY="75" text="Add Veterinarian to Clinic" />
       
     <!-- Label + TextField for Data Entry - Need 4 Total (See HousePet.java) -->
     <!-- Label + TextField for Animal Name -->
-      <Label fx:id="petNameLabel" styleClass="dataLabel" layoutX="25" layoutY="100" text="Name: "/>
-      <TextField fx:id="tfPetName" layoutX="115" layoutY="100" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Name" />
+      <Label fx:id="personFNameLabel" styleClass="dataLabel" layoutX="140" layoutY="150" text="First Name: "/>
+      <TextField fx:id="tfFirstName" layoutX="250" layoutY="150" prefHeight="30" prefWidth="325" promptText="Please Enter First Name" />
+      
+      <Label fx:id="personLNameLabel" styleClass="dataLabel" layoutX="590" layoutY="150" text="Last Name: "/>
+      <TextField fx:id="tfLastName" layoutX="700" layoutY="150" prefHeight="30" prefWidth="325" promptText="Please Enter Last Name" />
+      
+      <Label fx:id="personAgeLabel" styleClass="dataLabel" layoutX="250" layoutY="225" text="Age: "/>
+      <TextField fx:id="tfAge" layoutX="300" layoutY="225" prefHeight="30" prefWidth="650" promptText="Please Enter Age" />
+      
+      <Label fx:id="personEmailLabel" styleClass="dataLabel" layoutX="240" layoutY="300" text="Email: "/>
+      <TextField fx:id="tfEmail" layoutX="300" layoutY="300" prefHeight="30" prefWidth="650" promptText="Please Enter Email" />
+      
+      <Label fx:id="personPhoneLabel" styleClass="dataLabel" layoutX="150" layoutY="375" text="Phone Number: "/>
+      <TextField fx:id="tfPhone" layoutX="300" layoutY="375" prefHeight="30" prefWidth="650" promptText="Please Enter Phone Number" />
+      
+      <Label fx:id="houseNumberLabel" styleClass="dataLabel" layoutX="100" layoutY="450" text="House Number: "/>
+      <TextField fx:id="tfHouseNumber" layoutX="250" layoutY="450" prefHeight="30" prefWidth="325" promptText="Please Enter House Number" />
+      
+      <Label fx:id="streetNameLabel" styleClass="dataLabel" layoutX="580" layoutY="450" text="Street Name: "/>
+      <TextField fx:id="tfStreetName" layoutX="700" layoutY="450" prefHeight="30" prefWidth="325" promptText="Please Enter Street Name" />
+      
+      <Label fx:id="postcodeLabel" styleClass="dataLabel" layoutX="155" layoutY="525" text="Postcode: "/>
+      <TextField fx:id="tfPostcode" layoutX="250" layoutY="525" prefHeight="30" prefWidth="325" promptText="Please Enter Postcode" />
+      
+      <Label fx:id="cityLabel" styleClass="dataLabel" layoutX="655" layoutY="525" text="City: "/>
+      <TextField fx:id="tfCity" layoutX="700" layoutY="525" prefHeight="30" prefWidth="325" promptText="Please Enter City" />
+      
+      <Label fx:id="specialityLabel" styleClass="dataLabel" layoutX="210" layoutY="600" text="Specialty: "/>
+      <TextField fx:id="tfSpeciality" layoutX="300" layoutY="600" prefHeight="30" prefWidth="650" promptText="Please Enter Speciality" />
+      
+      <!-- Button for Submitting Record -->  
+      <Button fx:id="btnSubmit" layoutX="350" layoutY="675" onAction="#onSubmit" prefHeight="75" prefWidth="500" text="Submit" />
+      
 </Pane>

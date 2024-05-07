@@ -23,6 +23,7 @@ public class App extends Application {
     public static Clinic openClinic;
     public static String type;
     public List animalList;
+    public static int currentId;
     public static Validator validator = new Validator();
     public static Popup popup = new Popup();
     public static FileHandler fileHandler = new FileHandler();

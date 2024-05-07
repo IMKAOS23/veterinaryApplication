@@ -14,6 +14,7 @@ public class Address implements Serializable{
     private int houseNumber;
     private String streetName;
     private String postcode;
+    private String city;
     
     /**
      * Constructs a new Address object with specified houseNumber, streetName and postcode
@@ -21,25 +22,27 @@ public class Address implements Serializable{
      * @param houseNumber - Must be Above 0
      * @param streetName
      * @param postcode - Must be of UK Postcode Format 
+     * @param city 
      * 
-     * @throws ValidationException if houseNumber or postcode fails Validation
+     * @throws ValidationException
      */
-    public Address(int houseNumber, String streetName, String postcode) throws ValidationException {
-        if (!App.validator.validateInt(houseNumber)) {
-            throw new ValidationException("Validation Error: houseNumber must be above 0");
+    public Address(String houseNumber, String streetName, String postcode, String city) throws ValidationException {
+        int newInt = App.validator.convertToInteger(houseNumber, "House Number");
+        if (App.validator.validateInt(newInt, "House Number")) {
+            this.houseNumber = newInt;
         }
         
-        if (!App.validator.validateName(streetName)) {
-            throw new ValidationException("Validation Error: streetName must be more than 2 characters");
+        if (App.validator.validateString(streetName, "Street Name")) {
+            this.streetName = streetName;
         }
         
-        if (!App.validator.validatePostcode(postcode)) {
-            throw new ValidationException("Validation Error: postcode is not of UK format");
+        if (App.validator.validatePostcode(postcode)) {
+            this.postcode = postcode;
         }
         
-        this.houseNumber = houseNumber;
-        this.streetName  = streetName;
-        this.postcode = postcode;
+        if (App.validator.validateString(city, "City")) {
+            this.city = city;
+        }
     }
     
     /**
@@ -56,13 +59,13 @@ public class Address implements Serializable{
      * 
      * @param houseNumber - Must be above 0
      * 
-     * @throws ValidationException if less than 0
+     * @throws ValidationException
      */
-    public void setHouseNumber(int houseNumber) throws ValidationException {
-        if (!App.validator.validateInt(houseNumber)) {
-            throw new ValidationException("Validation Error: houseNumber must be above 0");
+    public void setHouseNumber(String houseNumber) throws ValidationException {
+        int newInt = App.validator.convertToInteger(houseNumber, "House Number");
+        if (App.validator.validateInt(newInt, "House Number")) {
+            this.houseNumber = newInt;
         }
-        this.houseNumber = houseNumber;
     }
     
     /**
@@ -79,13 +82,12 @@ public class Address implements Serializable{
      * 
      * @param streetName - Must contain more than 2 characters without spaces
      * 
-     * @throws ValidationException if less than 2 characters
+     * @throws ValidationException
      */
     public void setStreetName(String streetName) throws ValidationException {
-        if (!App.validator.validateName(streetName)) {
-            throw new ValidationException("Validation Error: streetName must be more than 2 characters");
+        if (App.validator.validateString(streetName, "Street Name")) {
+            this.streetName = streetName;
         }
-        this.streetName = streetName;
     }
     
     /**
@@ -102,12 +104,33 @@ public class Address implements Serializable{
      * 
      * @param postcode - Must be of UK Format
      * 
-     * @throws ValidationException if not of UK Format
+     * @throws ValidationException
      */
     public void setPostcode(String postcode) throws ValidationException {
-        if (!App.validator.validatePostcode(postcode)) {
-            throw new ValidationException("Validation Error: postcode must be of UK format");
+        if (App.validator.validatePostcode(postcode)) {
+            this.postcode = postcode;   
         }
-        this.postcode = postcode;
+    }
+    
+    /**
+     * Returns City of address
+     * 
+     * @return city
+     */
+    public String getCity() {
+        return this.city;
+    }
+    
+    /**
+     * Allows the changing of Address City
+     * 
+     * @param city - Must be 2 or more Characters long 
+     * 
+     * @throws ValidationException 
+     */
+    public void setCity(String city) throws ValidationException {
+        if (App.validator.validateString(city, "City")) {
+            this.city = city;
+        }
     }
 }

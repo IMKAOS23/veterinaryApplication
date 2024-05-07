@@ -4,7 +4,13 @@
  */
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.components.business.Farm;
+import com.mycompany.veterinaryApplication.App;
+import com.mycompany.veterinaryApplication.components.Tuple;
+import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
+import com.mycompany.veterinaryApplication.exceptions.ValidationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Farm Animal Class
@@ -14,7 +20,7 @@ import com.mycompany.veterinaryApplication.components.business.Farm;
  * @author markc
  */
 public class FarmAnimal extends Animal{
-    private Farm owner;
+    private int owner;
     
     /**
      * Constructs a ZooAnimal object with specified name, age, colour, species and owner
@@ -23,29 +29,13 @@ public class FarmAnimal extends Animal{
      * @param age
      * @param colour
      * @param species
-     * @param owner
+     * @param id
+     * 
+     * @throws ValidationException
+     * @throws IllegalArgumentException
      * 
      */
-    public FarmAnimal(String name, int age, String colour, String species, Farm owner) {
-        super(name, age, colour, species);
-        this.owner = owner;
-    }
-    
-    /**
-     * Returns the owner of the FarmAnimal
-     * 
-     * @return owner
-     */
-    public Farm getOwner() {
-        return this.owner;
-    }
-    
-    /**
-     * Allows the changing of FarmAnimal owner
-     * 
-     * @param owner 
-     */
-    public void setOwner(Farm owner) {
-        this.owner = owner;
+    public FarmAnimal(String name, String age, String colour, String species, int id) throws ValidationException, IllegalArgumentException {
+        super(name, age, colour, species, id);
     }
 }

@@ -25,3 +25,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-size: 20px;
     -fx-font-weight: 600;
 }
+
+#bigTitle {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+}

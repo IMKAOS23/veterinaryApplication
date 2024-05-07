@@ -19,7 +19,7 @@
     </Label>
 
     <TextField fx:id="tfSearchPets" layoutX="175" layoutY="25" prefHeight="30" prefWidth="725" promptText="Search for an Animal from an Opened Clinic" />
-    <Button fx:id="btnSubmitSearch" layoutX="925" layoutY="25" onAction="#submitSearch" prefHeight="30" prefWidth="250" text="Submit Search" />
+    <Button fx:id="btnSubmitSearch" defaultButton="true" layoutX="925" layoutY="25" onAction="#submitSearch" prefHeight="30" prefWidth="250" text="Submit Search" />
 
     <!-- Perfectly Place buttons to be centered and have Equal Distancing -->
     <Button fx:id="btnAddAnimal" layoutX="25" layoutY="75" onAction="#createAnimal" prefHeight="30" prefWidth="250" text="Add Animal" />
@@ -28,24 +28,19 @@
     <Button fx:id="btnAddZoo" layoutX="925" layoutY="75" onAction="#createAppointment" prefHeight="30" prefWidth="250" text="Book Appointment" />
 
     <!-- Perfectly placed buttons to be centered and have Equal Distance -->
-    <Button fx:id="btnCreateClinic" defaultButton="true" layoutX="175" layoutY="120" onAction="#createClinic" prefHeight="30" prefWidth="250" text="Create Pet Clinic" underline="true" />
-    <Button fx:id="btnOpenClinic" defaultButton="true" layoutX="475" layoutY="120" onAction="#openClinic" prefHeight="30" prefWidth="250" text="Open Pet Clinic" underline="true"/>
-    <Button fx:id="btnCloseClinic" defaultButton="true" layoutX="775" layoutY="120" onAction="#closeClinic" prefHeight="30" prefWidth="250" text="Close Pet Clinic" underline="true" />
+    <Button fx:id="btnCreateClinic" layoutX="175" layoutY="120" onAction="#createClinic" prefHeight="30" prefWidth="250" text="Create Pet Clinic" underline="true" />
+    <Button fx:id="btnOpenClinic" layoutX="475" layoutY="120" onAction="#openClinic" prefHeight="30" prefWidth="250" text="Open Pet Clinic" underline="true"/>
+    <Button fx:id="btnCloseClinic" layoutX="775" layoutY="120" onAction="#closeClinic" prefHeight="30" prefWidth="250" text="Close Pet Clinic" underline="true" />
 
     <Label fx:id="clinicOpen" styleClass="customSize" text="Clinic Open: None" layoutX="25" layoutY="165" />
     <!-- Using Scrollplane to add a Scrollable Pane which can hold much more Animal Objects for User Allowing for Easy Access -->
     <!-- Animals within Scrollplane are going to be gathered from an ArrayList initiated at the start of Application and Cleared upon closing Clinic -->
-    <ScrollPane fx:id="petScrollplane" layoutX="20" layoutY="200" prefHeight="580" prefWidth="1160">
+    <ScrollPane fx:id="scrollPane" layoutX="20" layoutY="200" prefHeight="525" prefWidth="1160">
         <!-- Veticle Box used as it stacks elements ontop of one another allowing for simple display of multiple items -->
-        <!-- Spacing Refers to the Spacing between elements displayed within VBox -->
-        <VBox spacing="5">
-               <!-- Added Record items go here
-                    placeholderText Would be Set to "No Animals in Clinic"
-                    or would be removed to make way for Animals -->
-                <Label fx:id="placeholderText" prefHeight="50" prefWidth="1100" text="Please Open Store to View Animals" underline="true"/>
-            <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
-        </VBox>
+        <!-- Will be Created with Code -->
+        <Label fx:id="noClinic" text="Open a Clinic to See Animals"/>
     </ScrollPane>
+    
+    <Button fx:id="btnCycleAnimals" layoutX="350" layoutY="735" onAction="#cycleAnimals" prefHeight="50" prefWidth="500" text="Cycle Animals"/> 
+    <Button fx:id="btnResetSearch" layoutX="925" layoutY="735" onAction="#resetSearch" prefHeight="50" prefWidth="250" text="Reset Search"/> 
 </Pane>

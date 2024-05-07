@@ -3,11 +3,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-
-<Pane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.mycompany.veterinaryApplication.controllers.AddPersonController"
-      stylesheets="@style.css" styleClass="overlay">
+<Pane prefHeight="800" prefWidth="1200" styleClass="overlay" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.veterinaryApplication.controllers.CycleAnimalsController">
+    
+        <!-- Layout -->
+    <!-- Button for Main Menu Navigation - Top Left -->
+      <Button fx:id="btnBack" layoutX="25" layoutY="25" onAction="#goBack" prefHeight="30" prefWidth="200" text="Go To Main Menu" />
+      
+    <!-- Label for Title of Page - Top Center -->
+      <Label id="bigTitle" fx:id="titleLabel" layoutX="475" layoutY="100" text="Animal ID - " />
+      
+    <!-- Label + TextField for Data Entry - Need 4 Total (See HousePet.java) -->
+    <!-- Label shows Name of Animal -->
+      <Label fx:id="petNameLabel" layoutX="495" layoutY="200" styleClass="dataLabel" text="Name: " />
+      <Label fx:id="nameOfAnimal" layoutX="560" layoutY="200" styleClass="dataLabel" text="Placeholder" /> 
+     
+    <!-- Label shows Age of Animal  -->
+      <Label fx:id="petAgeLabel" layoutX="510" layoutY="275" styleClass="dataLabel" text="Age: " />
+      <Label fx:id="ageOfAnimal" layoutX="560" layoutY="275" styleClass="dataLabel" text="Placeholder" />
+    
+    <!-- Label shows Colour of Animal -->  
+      <Label fx:id="petColourLabel" layoutX="485" layoutY="350" styleClass="dataLabel" text="Colour: " />
+      <Label fx:id="colourOfAnimal" layoutX="560" layoutY="350" styleClass="dataLabel" text="Placeholder" />
+    
+    <!-- Label Shows Animal Species -->  
+      <Label fx:id="petSpeciesLabel" layoutX="480" layoutY="425" styleClass="dataLabel" text="Species: " />
+      <Label fx:id="speciesOfAnimal" layoutX="560" layoutY="425" styleClass="dataLabel" text="Placeholder" />
+      
+    <!-- Owner - Shows Name of Business / Email of Owner -->
+      <Label fx:id="ownerSelect" layoutX="430" layoutY="500" styleClass="dataLabel" text="Owner Name: " />
+      <Label fx:id="ownerOfAnimal" layoutX="560" layoutY="500" styleClass="dataLabel" text="Placeholder" />
+      
+    <!-- Button for Cycling Animals -->  
+      <Button fx:id="btnPrevAnimal" layoutX="275" layoutY="650" onAction="#prevAnimal" prefHeight="75" prefWidth="275" text="Previous Animal" />
+      <Button fx:id="btnNextAnimal" layoutX="600" layoutY="650" onAction="#nextAnimal" prefHeight="75" prefWidth="275" text="Next Animal" />
+      
+      
     
 </Pane>

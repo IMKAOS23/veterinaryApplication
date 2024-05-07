@@ -6,40 +6,40 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="500" prefWidth="800" styleClass="overlay" stylesheets="@style.css"
+<Pane prefHeight="800" prefWidth="1200" styleClass="overlay" stylesheets="@style.css"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.mycompany.veterinaryApplication.controllers.AddAnimalController">
     
     <!-- Layout -->
     <!-- Button for Main Menu Navigation - Top Left -->
-      <Button fx:id="btnClose" layoutX="25" layoutY="25" onAction="#closeDialog" prefHeight="30" prefWidth="200" text="Close" />
+      <Button fx:id="btnBack" layoutX="25" layoutY="25" onAction="#goBack" prefHeight="30" prefWidth="200" text="Go To Main Menu" />
       
     <!-- Label for Title of Page - Top Center -->
-      <Label fx:id="titleLabel" styleClass="dataLabel" layoutX="275" layoutY="30" />
+      <Label fx:id="titleLabel" id="bigTitle" layoutX="425" layoutY="100" text="Add Placeholder to Clinic" />
       
     <!-- Label + TextField for Data Entry - Need 4 Total (See HousePet.java) -->
     <!-- Label + TextField for Animal Name -->
-      <Label fx:id="petNameLabel" styleClass="dataLabel" layoutX="25" layoutY="100" text="Name: "/>
-      <TextField fx:id="tfPetName" layoutX="115" layoutY="100" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Name" />
+      <Label fx:id="petNameLabel" styleClass="dataLabel" layoutX="230" layoutY="200" text="Name: "/>
+      <TextField fx:id="tfPetName" layoutX="300" layoutY="200" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Name" />
      
     <!-- Label + TextField for Animal Age  -->
-      <Label fx:id="petAgeLabel" styleClass="dataLabel" layoutX="25" layoutY="175" text="Age: "/>
-      <TextField fx:id="tfPetAge" layoutX="115" layoutY="175" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Age" />
+      <Label fx:id="petAgeLabel" styleClass="dataLabel" layoutX="250" layoutY="275" text="Age: "/>
+      <TextField fx:id="tfPetAge" layoutX="300" layoutY="275" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Age" />
     
     <!-- Label + TextField for Animal Colour -->  
-      <Label fx:id="petColourLabel" styleClass="dataLabel" layoutX="25" layoutY="250" text="Colour: "/>
-      <TextField fx:id="tfPetColour" layoutX="115" layoutY="250" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Colour" />
+      <Label fx:id="petColourLabel" styleClass="dataLabel" layoutX="225" layoutY="350" text="Colour: "/>
+      <TextField fx:id="tfPetColour" layoutX="300" layoutY="350" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Colour" />
     
     <!-- Label + TextField for Animal Species -->  
-      <Label fx:id="petSpeciesLabel" styleClass="dataLabel" layoutX="25" layoutY="325" text="Species: "/>
-      <TextField fx:id="tfPetSpecies" layoutX="115" layoutY="325" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Species" />
+      <Label fx:id="petSpeciesLabel" styleClass="dataLabel" layoutX="215" layoutY="425" text="Species: "/>
+      <TextField fx:id="tfPetSpecies" layoutX="300" layoutY="425" prefHeight="30" prefWidth="650" promptText="Please Enter Animal Species" />
       
     <!-- Selector - Dynamically Filled with Correct type of Owners for each animal type -->
-      <Label fx:id="ownerSelect" styleClass="dataLabel" layoutX="25" layoutY="400" text="Owner: "/>
-      <ComboBox fx:id="selector" layoutX="115" layoutY="400" prefHeight="30" prefWidth="650" />
+      <Label fx:id="ownerSelect" styleClass="dataLabel" layoutX="225" layoutY="500" text="Owner: "/>
+      <ComboBox fx:id="selector" layoutX="300" layoutY="500" prefHeight="30" prefWidth="650" />
       
     <!-- Button for Submitting Record -->  
-      <Button fx:id="btnSubmit" layoutX="275" layoutY="450" onAction="#onSubmit" prefHeight="30" prefWidth="250" text="Submit" />
+      <Button fx:id="btnSubmit" layoutX="350" layoutY="650" onAction="#onSubmit" prefHeight="75" prefWidth="500" text="Submit" />
       
       
       

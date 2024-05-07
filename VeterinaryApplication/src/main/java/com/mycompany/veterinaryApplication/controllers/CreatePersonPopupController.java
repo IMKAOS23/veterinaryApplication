@@ -20,13 +20,14 @@ public class CreatePersonPopupController {
     private void createPetOwner() throws IOException {
         this.closeDialog();
         App.type = "petOwner";
-        App.popup.showWindow("Add Pet Owner", "AddPerson");
+        App.setRoot("AddPerson");
     }
     
     @FXML 
     private void createVet() throws IOException{
         this.closeDialog();
         App.type = "vet";
-        App.popup.showWindow("Add Vet", "AddPerson");
+        App.setRoot("AddPerson");
+        
     }
 }
