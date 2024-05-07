@@ -93,6 +93,10 @@ public class MainMenuController {
             App.popup.showError("Clinic not open", "Open a Clinic before trying to add an Animal");
         }
         else {
+            if (App.openClinic.getOwners().isEmpty()) {
+                App.popup.showMessage("Create Owner Object", "Create an Owner object before trying to create an animal. Either: PetOwner, Farm, or Zoo");
+                return;
+            }
             App.popup.showWindow("Choose Animal Type", "CreateAnimalPopup");
         }
     }
