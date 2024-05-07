@@ -28,9 +28,9 @@
     <Button fx:id="btnAddZoo" layoutX="925" layoutY="75" onAction="#createAppointment" prefHeight="30" prefWidth="250" text="Book Appointment" />
 
     <!-- Perfectly placed buttons to be centered and have Equal Distance -->
-    <Button fx:id="btnCreateClinic" layoutX="175" layoutY="120" onAction="#createClinic" prefHeight="30" prefWidth="250" text="Create Pet Clinic" underline="true" />
-    <Button fx:id="btnOpenClinic" layoutX="475" layoutY="120" onAction="#openClinic" prefHeight="30" prefWidth="250" text="Open Pet Clinic" underline="true"/>
-    <Button fx:id="btnCloseClinic" layoutX="775" layoutY="120" onAction="#closeClinic" prefHeight="30" prefWidth="250" text="Close Pet Clinic" underline="true" />
+    <Button fx:id="btnCreateClinic" layoutX="175" layoutY="120" onAction="#createClinic" prefHeight="30" prefWidth="250" text="Create Animal Clinic" underline="true" />
+    <Button fx:id="btnOpenClinic" layoutX="475" layoutY="120" onAction="#openClinic" prefHeight="30" prefWidth="250" text="Open Animal Clinic" underline="true"/>
+    <Button fx:id="btnCloseClinic" layoutX="775" layoutY="120" onAction="#closeClinic" prefHeight="30" prefWidth="250" text="Close Animal Clinic" underline="true" />
 
     <Label fx:id="clinicOpen" styleClass="customSize" text="Clinic Open: None" layoutX="25" layoutY="165" />
     <!-- Using Scrollplane to add a Scrollable Pane which can hold much more Animal Objects for User Allowing for Easy Access -->
