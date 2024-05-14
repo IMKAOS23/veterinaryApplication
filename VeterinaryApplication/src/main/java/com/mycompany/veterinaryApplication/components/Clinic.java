@@ -2,10 +2,7 @@ package com.mycompany.veterinaryApplication.components;
 
 import com.mycompany.veterinaryApplication.App;
 import com.mycompany.veterinaryApplication.components.animal.Animal;
-import com.mycompany.veterinaryApplication.components.business.Business;
-import com.mycompany.veterinaryApplication.components.person.Person;
 import com.mycompany.veterinaryApplication.exceptions.NotFoundException;
-import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -42,17 +39,34 @@ public class Clinic implements Serializable{
         App.fileHandler.serialise(this.clinicName, this);
     }
     
+    /**
+     * Returns name of clinic
+     * 
+     * @return clinicName
+     */
     public String getName() {
         return this.clinicName;
     }
     
+    /**
+     * Allows the changing of the Clinic Name
+     * 
+     * @param clinicName 
+     */
     public void setName(String clinicName) {
         this.clinicName = clinicName;
     }
     
-    public void addAnimal(Object animal) throws IOException {
+    /**
+     * Used to add an Animal object to the clinic
+     * 
+     * @param animal
+     * 
+     * @throws IOException 
+     */
+    public void addAnimal(Animal animal) throws IOException {
         try {
-            Tuple pair = new Tuple(getLastId(this.animals) + 1, animal);
+            Tuple pair = new Tuple(this.animals.size() + 1, animal);
             this.animals.add(pair);
             App.fileHandler.serialise(this.clinicName, this);
         } catch (IOException e) {
@@ -60,9 +74,16 @@ public class Clinic implements Serializable{
         }
     }
     
+    /**
+     * Used to add an Owner object to the clinic, this is either PetOwner, Zoo, or Farm
+     * 
+     * @param owner
+     * 
+     * @throws IOException 
+     */
     public void addOwner(Object owner) throws IOException {
         try {
-            Tuple pair = new Tuple(getLastId(this.owners) + 1, owner);
+            Tuple pair = new Tuple(this.owners.size() + 1, owner);
             this.owners.add(pair);
             App.fileHandler.serialise(this.clinicName, this);
         } catch (IOException e) {
@@ -70,11 +91,35 @@ public class Clinic implements Serializable{
         }
     }
     
+    /**
+     * Returns the list of Animals within the clinic
+     * 
+     * @return animals
+     */
+    public List getAnimals() {
+        return this.animals;
+    }
+    
+    /**
+     * Returns the list of Owners within the clinic
+     * 
+     * @return owners
+     */
     public List getOwners() {
         return this.owners;
     }
     
-    public Person findOwner(int id) throws NotFoundException {
+    /**
+     * Used to find an Owner based on the ID found within the Tuple.
+     * Method uses a HashMap, Splits the Tuple into KEY - VALUE pairs.
+     * Then searches for a Key within the HashMap to find the corresponding owner
+     * 
+     * @param id
+     * @return owner. Object of HousePet, Farm, or Zoo
+     * 
+     * @throws NotFoundException 
+     */
+    public Object findOwner(int id) throws NotFoundException {
         Map<Integer, Object> ownerMap = new HashMap<>();
 
         List<Tuple<Integer, Object>> owners = App.openClinic.getOwners();
@@ -90,9 +135,19 @@ public class Clinic implements Serializable{
             // Handle case where owner ID is not found
             throw new NotFoundException("Not Found Error: Person not found within Clinic");
         }
-        return (Person) owner;
+        return (Object) owner;
     }
     
+    /**
+     * Used to find an Animal based on the ID found within the Tuple.
+     * Method uses a HashMap, Splits the Tuple into KEY - VALUE pairs.
+     * Then searches for a Key within the HashMap to find the corresponding Animal
+     * 
+     * @param id
+     * @return animal. Object of Animal
+     * 
+     * @throws NotFoundException 
+     */
     public Animal findAnimal(int id) throws NotFoundException {
         Map<Integer, Object> animalMap = new HashMap<>();
 
@@ -110,26 +165,5 @@ public class Clinic implements Serializable{
             throw new NotFoundException("Not Found Error: Animal not found within Clinic");
         }
         return (Animal) animal;
-    }
-    
-    public List getAnimals() {
-        return this.animals;
-    }
-    
-    private int getLastId(List list) {
-        // Quick check if empty
-        if (list.isEmpty()) {
-            return 0;
-        }
-        
-        // Checks for Highest ID
-        int biggestVal = 0;
-        for (int i = 0; i < list.size(); i++) {
-           Tuple tuple = (Tuple) list.get(i);
-           if ((int) tuple.getKey() > biggestVal) {
-               biggestVal = (int) tuple.getKey();
-           }
-        }
-        return biggestVal;
     }
 }
