@@ -36,7 +36,6 @@ public class MainMenuController {
     
     
     public void initialize() throws IOException {
-        tfSearchPets.requestFocus();
         if (App.openClinic != null) {
             clinicOpen.setText("Clinic Name: " + App.openClinic.getName());
             AnimalScrollPaneController controller = new AnimalScrollPaneController(scrollPane);
@@ -144,19 +143,18 @@ public class MainMenuController {
         }
         String clinicName = App.popup.showTextInput("Create Clinic", "Enter A Clinic Name", "Clinic Name: ");
         
-        if ("32323423423422".equals(clinicName)) {
+        if (clinicName == null) {
             return;
-        } else if (clinicName != null) {
-            if (App.validator.validateClinicName(clinicName)) {
+        } else {
+            try {
+                App.validator.validateClinicName(clinicName);
                 Clinic clinic = new Clinic(clinicName);
                 App.openClinic = clinic;
                 clinicOpen.setText("Clinic Name: " + App.openClinic.getName());
                 initialize();
-            } else {
-                App.popup.showError("Could Not Create Clinic", "Clinic name must be more than 8 characters");
+            } catch (ValidationException e) {
+                App.popup.showError("Could Not Create Clinic", e.getMessage());
             }
-        } else {
-            App.popup.showError("Could Not Create Clinic", "Clinic must have a name");
         }
         // Show User they sucessfully created a clinic
     }
