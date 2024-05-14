@@ -1,13 +1,6 @@
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.App;
-import com.mycompany.veterinaryApplication.components.Tuple;
-import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * ExoticAnimal Class
  * Used to create Exotic Animal Objects
@@ -18,7 +11,6 @@ public class ExoticAnimal extends Animal{
     /**
      *
      */
-    private int owner;
     
     /**
      * Constructs a new ExoticAnimal with specified name, age, colour, species, owner
