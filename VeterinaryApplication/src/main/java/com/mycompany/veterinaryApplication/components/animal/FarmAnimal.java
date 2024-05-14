@@ -4,13 +4,8 @@
  */
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.App;
-import com.mycompany.veterinaryApplication.components.Tuple;
-import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
+
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Farm Animal Class
