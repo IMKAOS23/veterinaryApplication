@@ -4,7 +4,6 @@
  */
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
 
 /**
@@ -26,7 +25,6 @@ public class ZooAnimal extends Animal{
      * 
      * @throws ValidationException
      * @throws IllegalArgumentException
-     * @throws OwnerNotFoundException
      * 
      */
     public ZooAnimal(String name, String age, String colour, String species, int id) throws ValidationException, IllegalArgumentException {
