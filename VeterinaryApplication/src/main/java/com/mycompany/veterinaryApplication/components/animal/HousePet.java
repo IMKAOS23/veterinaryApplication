@@ -1,13 +1,6 @@
 package com.mycompany.veterinaryApplication.components.animal;
 
-import com.mycompany.veterinaryApplication.App;
-import com.mycompany.veterinaryApplication.components.Tuple;
-import com.mycompany.veterinaryApplication.exceptions.OwnerNotFoundException;
 import com.mycompany.veterinaryApplication.exceptions.ValidationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * HousePet class
  * Used to create HousePet objects
@@ -17,12 +10,6 @@ import java.util.Map;
  * @author markc
  */
 public class HousePet extends Animal {
-    /**
-     * 
-     */
-    private Object owner;
-    
-    
     /**
      * 
      * Constructs a new HousePet with the specified name, age, colour, species and owner
