@@ -17,11 +17,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- *
+ * Class with No constructor. Used to Create popups for the user to show success or failure in different components. 
+ * For User Experience.
+ * 
  * @author markc
  */
 public class Popup {
-    
+    /**
+     * Methods takes in 2 parameters Title and Message and creates an instance of the alert class to display the Error
+     * 
+     * @param title
+     * @param message 
+     */
     public void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -29,6 +36,14 @@ public class Popup {
         alert.showAndWait();
     }
     
+    /**
+     * Methods takes in 2 parameters, title and message, and displays a confirmation box for with that message.
+     * 
+     * @param title
+     * @param message
+     * 
+     * @return true if OK button was pressed
+     */
     public boolean showConfirm(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
@@ -38,6 +53,12 @@ public class Popup {
         return result == ButtonType.OK;
     }
     
+    /**
+     * Method takes in 2 parameters, title and message, and displays a popup of type INFORMATION with that message
+     * 
+     * @param title
+     * @param message 
+     */
     public void showMessage(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -45,6 +66,16 @@ public class Popup {
         alert.showAndWait();
     }
     
+    /**
+     * Method that creates a popup with a custom style
+     * Takes in 2 parameters, title and the FXML used to within the Window
+     * Uses same FXML as App's private LoadFXML Method
+     * 
+     * @param title
+     * @param fxml
+     * 
+     * @throws IOException 
+     */
     public void showWindow(String title, String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         Parent root = fxmlLoader.load();
@@ -58,6 +89,17 @@ public class Popup {
         popupStage.showAndWait();
     }
     
+    /**
+     * Creates a Text Input Dialog with the 3 given parameters, title, headerText and ContentText
+     * 
+     * @param title
+     * @param headerText
+     * @param contentText
+     * 
+     * @return null | userInput 
+     * 
+     * @throws IOException 
+     */
     public String showTextInput(String title, String headerText, String contentText) throws IOException{
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
@@ -69,8 +111,9 @@ public class Popup {
         
         if (result.isPresent()) {
             String userInput = result.get();
-            return userInput.isEmpty() ? null : userInput;
+            return userInput;
         }
-        return "32323423423422";
+        // Null is returned if the user cancels out of the textInput box and does not show error.
+        return null;
     }
 }
